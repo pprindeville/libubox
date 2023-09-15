@@ -269,6 +269,7 @@ json_dump() {
 }
 
 json_get_type() {
+	# target=$2
 	local __dest="$1"
 	local __cur
 
@@ -338,11 +339,11 @@ json_select() {
 	local type
 	local cur
 
-	[ -z "$1" ] && {
+	[ -z "$target" ] && {
 		_json_set_var JSON_CUR "J_V"
 		return 0
 	}
-	[[ "$1" == ".." ]] && {
+	[[ "$target" == ".." ]] && {
 		_json_get_var cur JSON_CUR
 		_json_get_var cur "U_$cur"
 		_json_set_var JSON_CUR "$cur"
@@ -363,6 +364,8 @@ json_select() {
 }
 
 json_is_a() {
+	# target=$1
+	# type=$2
 	local type
 
 	json_get_type type "$1"
